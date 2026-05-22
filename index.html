@@ -3,134 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Label Designer Pro</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Label Designer Pro - Independent Sizing</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
         <div class="spinner-container">
             <div class="spinner"></div>
-            <p>Processing Excel File...<br><small>Extracting data and images</small></p>
+            <p>Processing...<br><small>Extracting data and images</small></p>
         </div>
     </div>
 
     <div class="main-layout">
+        <!-- LEFT SIDEBAR -->
         <div class="sidebar">
-            <!-- BRANDING HEADER -->
             <div class="branding-header">
-                <img src="logo.png" alt="Brand Logo" class="tool-logo">
+                <img src="logo.png" alt="Logo" class="tool-logo">
                 <p class="brand-tagline">hi im vyyy</p>
             </div>
 
-            <h1>Label Designer</h1>
-            
-            <!-- 1. Upload -->
             <div class="section">
                 <label>1. Upload Excel File (.xlsx)</label>
                 <input type="file" id="excelFile" accept=".xlsx">
-                <div id="errorMsg" class="error-text" style="display:none; color:red; font-size:11px; margin-top:5px;"></div>
             </div>
 
-            <!-- 2. Configuration -->
             <div id="configArea" style="display:none;">
                 <div class="section highlight">
-                    <label>2. Content Selection</label>
-                    <select id="columnSelect" style="margin-bottom: 10px;"></select>
-                    
-                    <div class="input-row">
-                        <label class="radio-label"><input type="radio" name="contentType" value="text" checked> Text Content</label>
-                        <label class="radio-label"><input type="radio" name="contentType" value="image"> Image Content</label>
+                    <label>2. Sticker Canvas Size (mm)</label>
+                    <div class="grid-config-sticker">
+                        <div class="input-group"><label>Width</label><input type="number" id="lWidth" value="100"></div>
+                        <div class="input-group"><label>Height</label><input type="number" id="lHeight" value="30"></div>
+                        <div class="input-group"><label>H-Gap</label><input type="number" id="hGap" value="2"></div>
+                        <div class="input-group"><label>V-Gap</label><input type="number" id="vGap" value="2"></div>
+                        <div class="input-group"><label>Left Marg</label><input type="number" id="mLeft" value="10"></div>
+                        <div class="input-group"><label>Top Marg</label><input type="number" id="mTop" value="10"></div>
                     </div>
                 </div>
 
                 <div class="section">
-                    <label>3. Row Range</label>
+                    <label>3. Range & Repeats</label>
                     <div class="input-row">
-                        <div class="input-group">
-                            <label>From</label>
-                            <input type="number" id="rowStart" value="1" step="1">
-                        </div>
-                        <div class="input-group">
-                            <label>To</label>
-                            <input type="number" id="rowEnd" value="10" step="1">
-                        </div>
+                        <input type="number" id="rowStart" value="1">
+                        <span>to</span>
+                        <input type="number" id="rowEnd" value="10">
+                        <span>Reps:</span>
+                        <input type="number" id="repeats" value="1">
                     </div>
                 </div>
 
-                <div class="grid-config">
-                    <div class="input-group">
-                        <label>Width (mm)</label>
-                        <input type="number" id="lWidth" value="13.5" step="0.1">
+                <!-- Asset 1 -->
+                <div class="asset-card color1">
+                    <label class="asset-title">Asset 1 (Independent Size)</label>
+                    <select id="a1_col" class="asset-select"></select>
+                    <div class="input-row mt-5">
+                        <label class="radio-label"><input type="radio" name="a1_type" value="text" checked> Text</label>
+                        <label class="radio-label"><input type="radio" name="a1_type" value="image"> Image</label>
                     </div>
-                    <div class="input-group">
-                        <label>Height (mm)</label>
-                        <input type="number" id="lHeight" value="13.5" step="0.1">
-                    </div>
-                    <div class="input-group">
-                        <label>H-Gap (mm)</label>
-                        <input type="number" id="hGap" value="3" step="0.1">
-                    </div>
-                    <div class="input-group">
-                        <label>V-Gap (mm)</label>
-                        <input type="number" id="vGap" value="1" step="0.1">
-                    </div>
-                    <div class="input-group">
-                        <label>Left Margin</label>
-                        <input type="number" id="mLeft" value="10" step="0.5">
-                    </div>
-                    <div class="input-group">
-                        <label>Top Margin</label>
-                        <input type="number" id="mTop" value="10" step="0.5">
-                    </div>
-                    <div class="input-group">
-                        <label>Repeats</label>
-                        <input type="number" id="repeats" value="1" step="1">
-                    </div>
-                    <div id="fontSizeGroup" class="input-group">
-                        <label>Font Size</label>
-                        <input type="number" id="fSize" value="4" step="0.5">
+                    <div class="grid-config-asset mt-5">
+                        <div class="input-group"><label>X</label><input type="number" id="a1_x" value="2"></div>
+                        <div class="input-group"><label>Y</label><input type="number" id="a1_y" value="2"></div>
+                        <div class="input-group"><label>W (Img)</label><input type="number" id="a1_w" value="20"></div>
+                        <div class="input-group"><label>H (Img)</label><input type="number" id="a1_h" value="20"></div>
+                        <div class="input-group"><label>Font</label><input type="number" id="a1_f" value="10"></div>
                     </div>
                 </div>
 
-                <div class="section" id="alignmentSection">
-                    <label>4. Text Alignment</label>
-                    <div class="input-row">
-                        <select id="hAlign">
-                            <option value="left">Left</option>
-                            <option value="center" selected>Center</option>
-                            <option value="right">Right</option>
-                        </select>
-                        <select id="vAlign">
-                            <option value="top">Top</option>
-                            <option value="middle" selected>Middle</option>
-                            <option value="bottom">Bottom</option>
-                        </select>
+                <!-- Asset 2 -->
+                <div class="asset-card color2">
+                    <label class="asset-title">Asset 2 (Independent Size)</label>
+                    <select id="a2_col" class="asset-select"></select>
+                    <div class="input-row mt-5">
+                        <label class="radio-label"><input type="radio" name="a2_type" value="text"> Text</label>
+                        <label class="radio-label"><input type="radio" name="a2_type" value="image" checked> Image</label>
+                    </div>
+                    <div class="grid-config-asset mt-5">
+                        <div class="input-group"><label>X</label><input type="number" id="a2_x" value="40"></div>
+                        <div class="input-group"><label>Y</label><input type="number" id="a2_y" value="2"></div>
+                        <div class="input-group"><label>W (Img)</label><input type="number" id="a2_w" value="20"></div>
+                        <div class="input-group"><label>H (Img)</label><input type="number" id="a2_h" value="20"></div>
+                        <div class="input-group"><label>Font</label><input type="number" id="a2_f" value="10"></div>
                     </div>
                 </div>
 
-                <button id="previewBtn" class="btn-secondary">Refresh Preview</button>
-                <button id="generateBtn" class="btn-primary">Download PDF</button>
+                <!-- Asset 3 -->
+                <div class="asset-card color3">
+                    <label class="asset-title">Asset 3 (Independent Size)</label>
+                    <select id="a3_col" class="asset-select"></select>
+                    <div class="input-row mt-5">
+                        <label class="radio-label"><input type="radio" name="a3_type" value="text" checked> Text</label>
+                        <label class="radio-label"><input type="radio" name="a3_type" value="image"> Image</label>
+                    </div>
+                    <div class="grid-config-asset mt-5">
+                        <div class="input-group"><label>X</label><input type="number" id="a3_x" value="70"></div>
+                        <div class="input-group"><label>Y</label><input type="number" id="a3_y" value="2"></div>
+                        <div class="input-group"><label>W (Img)</label><input type="number" id="a3_w" value="20"></div>
+                        <div class="input-group"><label>H (Img)</label><input type="number" id="a3_h" value="20"></div>
+                        <div class="input-group"><label>Font</label><input type="number" id="a3_f" value="10"></div>
+                    </div>
+                </div>
 
-                <div class="guide-box">
-                    <h4>⚠️ PRINT SPECIFICATIONS</h4>
-                    <ul>
-                        <li>Set <strong>Scale</strong> to 100% (Actual Size).</li>
-                        <li>Set <strong>Paper</strong> to A4.</li>
-                    </ul>
+                <div class="sticky-footer">
+                    <button id="previewBtn" class="btn-secondary">Refresh Preview</button>
+                    <button id="generateBtn" class="btn-primary">Download PDF</button>
                 </div>
             </div>
         </div>
 
+        <!-- RIGHT PREVIEW -->
         <div class="preview-area">
-            <div class="preview-header">Live PDF Preview (Page 1)</div>
-            <iframe id="pdfPreview"></iframe>
+            <div class="preview-header">Live PDF Preview (A4 Page)</div>
+            <div class="iframe-container">
+                <iframe id="pdfPreview"></iframe>
+            </div>
         </div>
     </div>
 
-    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
