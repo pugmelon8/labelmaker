@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Label Designer Pro</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p>Processing Excel File...<br><small>Extracting data and images</small></p>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar">
+            <!-- BRANDING HEADER -->
+            <div class="branding-header">
+                <img src="logo.png" alt="Brand Logo" class="tool-logo">
+                <p class="brand-tagline">hi im vyyy</p>
+            </div>
+
+            <h1>Label Designer</h1>
+            
+            <!-- 1. Upload -->
+            <div class="section">
+                <label>1. Upload Excel File (.xlsx)</label>
+                <input type="file" id="excelFile" accept=".xlsx">
+                <div id="errorMsg" class="error-text" style="display:none; color:red; font-size:11px; margin-top:5px;"></div>
+            </div>
+
+            <!-- 2. Configuration -->
+            <div id="configArea" style="display:none;">
+                <div class="section highlight">
+                    <label>2. Content Selection</label>
+                    <select id="columnSelect" style="margin-bottom: 10px;"></select>
+                    
+                    <div class="input-row">
+                        <label class="radio-label"><input type="radio" name="contentType" value="text" checked> Text Content</label>
+                        <label class="radio-label"><input type="radio" name="contentType" value="image"> Image Content</label>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <label>3. Row Range</label>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>From</label>
+                            <input type="number" id="rowStart" value="1" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label>To</label>
+                            <input type="number" id="rowEnd" value="10" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-config">
+                    <div class="input-group">
+                        <label>Width (mm)</label>
+                        <input type="number" id="lWidth" value="13.5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Height (mm)</label>
+                        <input type="number" id="lHeight" value="13.5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>H-Gap (mm)</label>
+                        <input type="number" id="hGap" value="3" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>V-Gap (mm)</label>
+                        <input type="number" id="vGap" value="1" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Left Margin</label>
+                        <input type="number" id="mLeft" value="10" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Top Margin</label>
+                        <input type="number" id="mTop" value="10" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Repeats</label>
+                        <input type="number" id="repeats" value="1" step="1">
+                    </div>
+                    <div id="fontSizeGroup" class="input-group">
+                        <label>Font Size</label>
+                        <input type="number" id="fSize" value="4" step="0.5">
+                    </div>
+                </div>
+
+                <div class="section" id="alignmentSection">
+                    <label>4. Text Alignment</label>
+                    <div class="input-row">
+                        <select id="hAlign">
+                            <option value="left">Left</option>
+                            <option value="center" selected>Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                        <select id="vAlign">
+                            <option value="top">Top</option>
+                            <option value="middle" selected>Middle</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="previewBtn" class="btn-secondary">Refresh Preview</button>
+                <button id="generateBtn" class="btn-primary">Download PDF</button>
+
+                <div class="guide-box">
+                    <h4>⚠️ PRINT SPECIFICATIONS</h4>
+                    <ul>
+                        <li>Set <strong>Scale</strong> to 100% (Actual Size).</li>
+                        <li>Set <strong>Paper</strong> to A4.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-area">
+            <div class="preview-header">Live PDF Preview (Page 1)</div>
+            <iframe id="pdfPreview"></iframe>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
